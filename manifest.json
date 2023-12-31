@@ -1,0 +1,44 @@
+{
+    "manifest_version": 2,
+    "name": "Simple Pages Translate (TWP)",
+    "version": "1.0.2",
+    "icon": {
+        "32": "google-translate-32.png"
+    },
+  
+    "description": "This is a simple add-on use TWP to translate the web pages for firefox mobile. (google service only)",
+    
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "run_at": "document_start",
+            "js": [
+              "background/languages.js"
+            ]
+        },
+        {
+            "matches": ["<all_urls>"],
+            "run_at": "document_end",
+            "js": [
+                "src/js/twp.js",
+                "src/js/showNotify.js",
+                "src/js/simpleTranslate.js"
+            ]
+        }
+    ],
+    "permissions": [
+        "https://translate.googleapis.com/translate_a/t",
+        "storage",
+        "webRequest"
+    ],
+    "background": {
+        "persistent": false,
+        "scripts": [
+            "background/config.js",
+            "background/languages.js",
+            "background/translationCache.js",
+            "background/translationService.js"
+        ]
+    }
+  }
+  
